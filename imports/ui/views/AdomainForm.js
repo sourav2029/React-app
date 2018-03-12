@@ -19,6 +19,7 @@ class AdomainForm extends Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleCategoryChange = this.handleCategoryChange.bind(this);
+        this.handleStatusChange = this.handleStatusChange.bind(this);
     }
 
     handleChange(event) {
@@ -41,6 +42,24 @@ class AdomainForm extends Component {
     handleSubmit(event) {
         alert('Submitted JSON: ' + JSON.stringify(this.state));
         event.preventDefault();
+    }
+
+    handleStatusChange(event) {
+        console.log(event);
+        const target = event.target;
+        const value = target.value;
+
+        if (value != 'REJECTED') {
+            this.setState({
+                rejectionComment : null,
+                rejectionType : null,
+                status : value
+            });
+        } else {
+            this.setState({
+                status : value
+            });
+        }
     }
 
     // handleSubmit(event) {
@@ -69,7 +88,7 @@ class AdomainForm extends Component {
                                                 <label className="col-sm-2 col-form-label "> <strong>Adomain Name : </strong></label>
                                                 <input className="form-control col-sm-4 m-b" name="name" type="text" value={this.state.name} onChange={this.handleChange}/>
                                                 <label className="col-sm-2 col-form-label"> <strong>Status : </strong></label>
-                                                    <select  name="status" value = {this.state.status} className="form-control col-sm-4 m-b" onChange={this.handleChange}>
+                                                    <select  name="status" value = {this.state.status} className="form-control col-sm-4 m-b" onChange={this.handleStatusChange}>
                                                         <option value = 'PENDING'> Pending </option>
                                                         <option value = 'ALLOWED'> Allowed </option>
                                                         <option value = 'REJECTED'> Rejected </option>
