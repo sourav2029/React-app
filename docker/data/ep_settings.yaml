@@ -1,0 +1,18 @@
+default:
+  last: false
+
+prod:
+  uh1:
+    lens:
+      host: 'krns4101.grid.uh1.inmobi.com'
+      port: 8080
+  dfw1:
+    lens:
+      host: 'lens.data.inmobi.com'
+      port: 8080
+
+non_prod:
+  corp:
+    lens:
+      host: 'krns4101.grid.uh1.inmobi.com'
+      port: 8080
