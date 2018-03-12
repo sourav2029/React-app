@@ -11,6 +11,7 @@ import 'react-table/react-table.css'
 const adomains = gql`
   {
      adomains{
+        id
         adomain
         name
         status

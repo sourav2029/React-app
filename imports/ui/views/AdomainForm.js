@@ -8,7 +8,8 @@ class AdomainForm extends Component {
         const {original} = row;
         console.log(props);
         this.state = {
-            name :  original.name ,
+            id : original.id,
+            name :  original.name,
             status : original.status,
             isGeneric : original.isGeneric,
             rejectionComment: original.rejectionComment,
@@ -63,7 +64,7 @@ class AdomainForm extends Component {
                             </div>
                             <div className="ibox-content">
                                         <form onSubmit={this.handleSubmit}>
-                                            <CategoryView iabCategories={this.state.iabCategories} onChange = {this.handleCategoryChange} ></CategoryView>
+                                            <CategoryView id={this.state.id} iabCategories={this.state.iabCategories} onChange = {this.handleCategoryChange} ></CategoryView>
                                             <div className="form-group row">
                                                 <label className="col-sm-2 col-form-label "> <strong>Adomain Name : </strong></label>
                                                 <input className="form-control col-sm-4 m-b" name="name" type="text" value={this.state.name} onChange={this.handleChange}/>

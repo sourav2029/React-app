@@ -10,6 +10,7 @@ export default typeDefs = `
     }
 
     type Adomain {
+        id: String,
         adomain : String,
         name : String,
         iabCategories : [String],
