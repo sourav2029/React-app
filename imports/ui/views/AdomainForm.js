@@ -42,6 +42,8 @@ class AdomainForm extends Component {
     handleSubmit(event) {
         alert('Submitted JSON: ' + JSON.stringify(this.state));
         event.preventDefault();
+        let {handleSave}=this.props;
+        handleSave && handleSave();
     }
 
     handleStatusChange(event) {
@@ -73,6 +75,7 @@ class AdomainForm extends Component {
     // }
 
     render() {
+        console.log(this.props);
         return (
             <div className="wrapper wrapper-content animated fadeInRight">
                 <div className="row">

@@ -23,18 +23,29 @@ const adomains = gql`
   }
 `
 class AdomianTable extends Component {
-    // constructor(props) {
-    //     super(props);
-    //     this.data = props.data;
-    //     console.log(this.data);
-    // }
+    constructor(props) {
+        super(props);
+        // this.data = props.data;
+        // console.log(this.data);
+        this.state={
+            adomains : this.props.data.adomains
+        }
+    }
 
     handleClick() {
         alert("handle it later");
     }
+    handleSave=()=>{
+        const index = this.row.index;
+
+        this.setState({
+            adomain : this.state
+        })
+        alert("test");
+    }
 
     render() {
-        const {data} = this.props;
+        const {data,data:{adomains}} = this.props;
         if (data.error) {
            return (
                 <div className="panel-body" style={{paddingTop: '0px', paddingBottom: '0px'}}>
@@ -99,13 +110,34 @@ class AdomianTable extends Component {
                 Cell : row => <div>{row.value.join(", ")}</div>
                 }, {
                 Header : 'Status',
-                accessor : 'status'
+                accessor : 'status',
+                filterMethod: (filter, row) => {
+                    if (filter.value === "ALL") {
+                        return true;
+                    }
+                    if (filter.value == row.status) {
+                        return true;
+                    }
+                    return false;
+                },
+                Filter: ({ filter, onChange }) =>
+                    <select
+                        onChange={event => onChange(event.target.value)}
+                        style={{ width: "100%" }}
+                        value ={filter ? filter.value : "ALL"}
+                    >
+                        <option value = 'ALL'> All </option>
+                        <option value = 'PENDING'> Pending </option>
+                        <option value = 'ALLOWED'> Allowed </option>
+                        <option value = 'REJECTED'> Rejected </option>
+                    </select>
             }];
 
             return (
                 <div>
                     <ReactTable
-
+                    showPaginationTop
+                    filterable
                     getTdProps={(state, rowInfo, column, instance) => {
                         return {
                         onClick: (e, handleOriginal) => {
@@ -123,16 +155,16 @@ class AdomianTable extends Component {
                             if (handleOriginal) {
                                 handleOriginal()
                             }
-                            return <AdomainForm row={rowInfo}></AdomainForm>
+                            return <AdomainForm handleSave={this.handleSave} row={rowInfo}></AdomainForm>
                         }
                     }}}
-                    data={data.adomains}
+                    data={adomains}
                     columns={columns}
                     defaultPageSize={10}
                     className="footable table table-stripped toggle-arrow-tiny tablet breakpoint footable-loaded"
                     SubComponent =  { row =>{
                         return (
-                            <AdomainForm row={row} ></AdomainForm>
+                            <AdomainForm handleSave={this.handleSave} row={row} ></AdomainForm>
                         );
                     }}
                     />
