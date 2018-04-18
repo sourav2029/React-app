@@ -1,4 +1,4 @@
-Adomain Tagging Portal
+A simple react App.
 
 Dependencies :  
 1)Meteor - curl "https://install.meteor.com/?release=1.4.2.3" | sh  
